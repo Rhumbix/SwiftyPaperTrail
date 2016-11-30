@@ -10,6 +10,8 @@
 		A9CC5B1F1DEF66DB003AD86A /* SwiftyPaperTrail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CC5B151DEF66DB003AD86A /* SwiftyPaperTrail.framework */; };
 		A9CC5B241DEF66DB003AD86A /* SwiftyPaperTrailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */; };
 		A9CC5B261DEF66DB003AD86A /* SwiftyPaperTrail.h in Headers */ = {isa = PBXBuildFile; fileRef = A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */; };
+		A9CC5B311DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,7 @@
 		A9CC5B1E1DEF66DB003AD86A /* SwiftyPaperTrailTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyPaperTrailTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyPaperTrailTests.swift; sourceTree = "<group>"; };
 		A9CC5B251DEF66DB003AD86A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyPaperTrail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,7 @@
 			children = (
 				A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */,
 				A9CC5B191DEF66DB003AD86A /* Info.plist */,
+				A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -149,6 +153,7 @@
 					A9CC5B141DEF66DB003AD86A = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = Y82MDE6MA9;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					A9CC5B1D1DEF66DB003AD86A = {
@@ -198,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9CC5B241DEF66DB003AD86A /* SwiftyPaperTrailTests.swift in Sources */,
+				A9CC5B311DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +329,7 @@
 		A9CC5B2A1DEF66DB003AD86A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Y82MDE6MA9;
@@ -334,6 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rhumbix.ios.SwiftyPaperTrail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -341,6 +350,7 @@
 		A9CC5B2B1DEF66DB003AD86A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Y82MDE6MA9;
@@ -360,6 +370,7 @@
 		A9CC5B2D1DEF66DB003AD86A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Y82MDE6MA9;
 				INFOPLIST_FILE = SwiftyPaperTrailTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -372,6 +383,7 @@
 		A9CC5B2E1DEF66DB003AD86A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Y82MDE6MA9;
 				INFOPLIST_FILE = SwiftyPaperTrailTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
