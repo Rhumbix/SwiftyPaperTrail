@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
 		A9CC5B1F1DEF66DB003AD86A /* SwiftyPaperTrail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CC5B151DEF66DB003AD86A /* SwiftyPaperTrail.framework */; };
 		A9CC5B241DEF66DB003AD86A /* SwiftyPaperTrailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */; };
 		A9CC5B261DEF66DB003AD86A /* SwiftyPaperTrail.h in Headers */ = {isa = PBXBuildFile; fileRef = A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */; };
 		A9CC5B311DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */; };
+		C09C02DE6184AA1BF3B62F4A /* Pods_SwiftyPaperTrailTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59EDC1C749A533B4DBEAEA54 /* Pods_SwiftyPaperTrailTests.framework */; };
+		C49403965297DE6457BEFAEA /* Pods_SwiftyPaperTrail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D98DBC020CAD6A562F1ECE /* Pods_SwiftyPaperTrail.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		59EDC1C749A533B4DBEAEA54 /* Pods_SwiftyPaperTrailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyPaperTrailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail.debug.xcconfig"; sourceTree = "<group>"; };
+		8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatter.swift; sourceTree = "<group>"; };
 		A9CC5B151DEF66DB003AD86A /* SwiftyPaperTrail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyPaperTrail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyPaperTrail.h; sourceTree = "<group>"; };
 		A9CC5B191DEF66DB003AD86A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,6 +39,9 @@
 		A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyPaperTrailTests.swift; sourceTree = "<group>"; };
 		A9CC5B251DEF66DB003AD86A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyPaperTrail.swift; sourceTree = "<group>"; };
+		AAEF81E58388CA36813A1DA6 /* Pods-SwiftyPaperTrail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrail.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail.release.xcconfig"; sourceTree = "<group>"; };
+		AB9A91E83A1D46841B3A6877 /* Pods-SwiftyPaperTrailTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrailTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests.release.xcconfig"; sourceTree = "<group>"; };
+		C4D98DBC020CAD6A562F1ECE /* Pods_SwiftyPaperTrail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyPaperTrail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49403965297DE6457BEFAEA /* Pods_SwiftyPaperTrail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,18 +58,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9CC5B1F1DEF66DB003AD86A /* SwiftyPaperTrail.framework in Frameworks */,
+				C09C02DE6184AA1BF3B62F4A /* Pods_SwiftyPaperTrailTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42D3B3DF65950EB3F39698A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4D98DBC020CAD6A562F1ECE /* Pods_SwiftyPaperTrail.framework */,
+				59EDC1C749A533B4DBEAEA54 /* Pods_SwiftyPaperTrailTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A9CC5B0B1DEF66DB003AD86A = {
 			isa = PBXGroup;
 			children = (
 				A9CC5B171DEF66DB003AD86A /* SwiftyPaperTrail */,
 				A9CC5B221DEF66DB003AD86A /* SwiftyPaperTrailTests */,
 				A9CC5B161DEF66DB003AD86A /* Products */,
+				B48657FB0D85BE17158D0511 /* Pods */,
+				42D3B3DF65950EB3F39698A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +100,7 @@
 				A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */,
 				A9CC5B191DEF66DB003AD86A /* Info.plist */,
 				A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */,
+				A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -88,6 +112,17 @@
 				A9CC5B251DEF66DB003AD86A /* Info.plist */,
 			);
 			path = SwiftyPaperTrailTests;
+			sourceTree = "<group>";
+		};
+		B48657FB0D85BE17158D0511 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */,
+				AAEF81E58388CA36813A1DA6 /* Pods-SwiftyPaperTrail.release.xcconfig */,
+				8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */,
+				AB9A91E83A1D46841B3A6877 /* Pods-SwiftyPaperTrailTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,10 +143,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9CC5B291DEF66DB003AD86A /* Build configuration list for PBXNativeTarget "SwiftyPaperTrail" */;
 			buildPhases = (
+				7E4D79663F500CF0E9ABFD0A /* [CP] Check Pods Manifest.lock */,
 				A9CC5B101DEF66DB003AD86A /* Sources */,
 				A9CC5B111DEF66DB003AD86A /* Frameworks */,
 				A9CC5B121DEF66DB003AD86A /* Headers */,
 				A9CC5B131DEF66DB003AD86A /* Resources */,
+				61FE10D93FDBD8F461B58492 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,9 +163,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9CC5B2C1DEF66DB003AD86A /* Build configuration list for PBXNativeTarget "SwiftyPaperTrailTests" */;
 			buildPhases = (
+				337AED1E5C4FF293C11AEB90 /* [CP] Check Pods Manifest.lock */,
 				A9CC5B1A1DEF66DB003AD86A /* Sources */,
 				A9CC5B1B1DEF66DB003AD86A /* Frameworks */,
 				A9CC5B1C1DEF66DB003AD86A /* Resources */,
+				AF994905FFADF4E77ABCCA1E /* [CP] Embed Pods Frameworks */,
+				E2778CC3AB849CAEC947CA91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -198,12 +238,91 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		337AED1E5C4FF293C11AEB90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		61FE10D93FDBD8F461B58492 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E4D79663F500CF0E9ABFD0A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AF994905FFADF4E77ABCCA1E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2778CC3AB849CAEC947CA91 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A9CC5B101DEF66DB003AD86A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
+				A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +447,7 @@
 		};
 		A9CC5B2A1DEF66DB003AD86A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -349,6 +469,7 @@
 		};
 		A9CC5B2B1DEF66DB003AD86A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAEF81E58388CA36813A1DA6 /* Pods-SwiftyPaperTrail.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -369,6 +490,7 @@
 		};
 		A9CC5B2D1DEF66DB003AD86A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Y82MDE6MA9;
@@ -382,6 +504,7 @@
 		};
 		A9CC5B2E1DEF66DB003AD86A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB9A91E83A1D46841B3A6877 /* Pods-SwiftyPaperTrailTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Y82MDE6MA9;
@@ -412,6 +535,7 @@
 				A9CC5B2B1DEF66DB003AD86A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9CC5B2C1DEF66DB003AD86A /* Build configuration list for PBXNativeTarget "SwiftyPaperTrailTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +544,7 @@
 				A9CC5B2E1DEF66DB003AD86A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,17 @@
+PODS:
+  - CocoaAsyncSocket (7.5.1):
+    - CocoaAsyncSocket/GCD (= 7.5.1)
+  - CocoaAsyncSocket/GCD (7.5.1)
+  - SwiftyLogger (2.0.2)
+
+DEPENDENCIES:
+  - CocoaAsyncSocket
+  - SwiftyLogger
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
+  SwiftyLogger: 5d3be1a79952bb31f2f4a9ec1289b00af6c84521
+
+PODFILE CHECKSUM: 6c5587a86981d9a5664fb7e2af412f4df5d681b7
+
+COCOAPODS: 1.1.1
