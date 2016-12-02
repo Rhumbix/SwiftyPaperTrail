@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
-		A9A0905E1DF0EB9100E133BC /* SyslogFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */; };
-		A9A0905F1DF0EC0200E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
-		A9A090641DF0F3BA00E133BC /* SwiftyLogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */; };
-		A9A090651DF0F3BA00E133BC /* SwiftyLogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */; };
 		A9CC5B1F1DEF66DB003AD86A /* SwiftyPaperTrail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CC5B151DEF66DB003AD86A /* SwiftyPaperTrail.framework */; };
 		A9CC5B241DEF66DB003AD86A /* SwiftyPaperTrailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */; };
 		A9CC5B261DEF66DB003AD86A /* SwiftyPaperTrail.h in Headers */ = {isa = PBXBuildFile; fileRef = A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,8 +32,6 @@
 		65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail.debug.xcconfig"; sourceTree = "<group>"; };
 		8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatter.swift; sourceTree = "<group>"; };
-		A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatterTests.swift; sourceTree = "<group>"; };
-		A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyLogMessage.swift; sourceTree = "<group>"; };
 		A9CC5B151DEF66DB003AD86A /* SwiftyPaperTrail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyPaperTrail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CC5B181DEF66DB003AD86A /* SwiftyPaperTrail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyPaperTrail.h; sourceTree = "<group>"; };
 		A9CC5B191DEF66DB003AD86A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,7 +101,6 @@
 				A9CC5B191DEF66DB003AD86A /* Info.plist */,
 				A9CC5B2F1DEF6705003AD86A /* SwiftyPaperTrail.swift */,
 				A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */,
-				A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -116,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */,
-				A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */,
 				A9CC5B251DEF66DB003AD86A /* Info.plist */,
 			);
 			path = SwiftyPaperTrailTests;
@@ -330,7 +322,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
-				A9A090641DF0F3BA00E133BC /* SwiftyLogMessage.swift in Sources */,
 				A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,9 +330,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9A0905E1DF0EB9100E133BC /* SyslogFormatterTests.swift in Sources */,
-				A9A0905F1DF0EC0200E133BC /* SyslogFormatter.swift in Sources */,
-				A9A090651DF0F3BA00E133BC /* SwiftyLogMessage.swift in Sources */,
 				A9CC5B241DEF66DB003AD86A /* SwiftyPaperTrailTests.swift in Sources */,
 				A9CC5B311DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
 			);
