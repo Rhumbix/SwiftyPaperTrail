@@ -10,77 +10,74 @@ import UIKit
 
 /*
     Default formatter. Syslog format is:
-    \<xx\>timestamp machineName programName: message
-    xx => Log Level
-    timestamp => Time in UTC
-    machineName => Vendor UUID
-    programName => CFBundleDisplayName sans whitespace
+    \<22\>timestamp machineName programName: message
+    22 => Syslog Numerical Code. Papertrail wants RFC-5424's 22 Code: Local Use
+    timestamp => yyyy-MM-dd'T'HH:mm:ss
+        timezone is UTC by default. Papertrail allows you to view the 
+        logs in any timezone from settings.
+    machineName => CFBundleIdentifier
+    programName => CFBundleShortVersionString-CFBundleVersion
  
     Customizations:
-    machinName
+    machineName
     programName
-    dateFormat
-    timezone (default is UTC)
-    logLevel (default is debug)
 */
 
 class SyslogFormatter: NSObject {
     static let sharedInstance = SyslogFormatter()
     
-    enum LogLevel:String{
-        case error = "11"
-        case warning = "12"
-        case info = "14"
-        case debug = "15"
-//        case verbose = "15"
+    var machineName:String?
+    var programName:String?
+    private var dateFormat:String = "yyyy-MM-dd'T'HH:mm:ss"
+    private var dateFormatter:DateFormatter!
+    
+    override init() {
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
     }
     
-    var machineName:String = UIDevice.current.identifierForVendor!.uuidString
-    var programName:String?
-    var dateFormat:String = "yyyy-MM-dd'T'HH:mm:ss"
-    var timezone:TimeZone = TimeZone(abbreviation: "UTC")!
-    var logLevel:LogLevel = .info
-    var dateFormatter:DateFormatter?
-    
     private func dateString(date:Date) -> String {
-        if dateFormatter == nil {
-            dateFormatter = DateFormatter()
-            dateFormatter!.dateFormat = dateFormat
-            dateFormatter!.timeZone = timezone
-        }
-
         return dateFormatter!.string(from: date)
+    }
+    
+    private func getMachineName() -> String {
+        if machineName != nil {
+            return machineName!
+        }
+        
+        var machineString = "SwiftyPapertrailDefaultMachine"
+        let identifier = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier")
+        if let idString = identifier as? String {
+            machineString = idString
+        }
+        
+        return machineString.trimmingCharacters(in: .whitespaces)
     }
     
     private func getProgramName() -> String {
         if programName != nil {
             return programName!
         }
-        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleExecutable")
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")
         
         var programArray:[String] = []
-        if let appNameString:String = appName as? String {
-            programArray.append(appNameString)
-        }
+
         if let versionString:String = version as? String {
-            programArray.append(versionString)
+            programArray.append(versionString.trimmingCharacters(in: .whitespaces))
         }
         if let buildString:String = build as? String {
-            programArray.append(buildString)
+            programArray.append(buildString.trimmingCharacters(in: .whitespaces))
         }
 
         return programArray.count > 0 ? programArray.joined(separator: "-") : "SwiftyPapertrail"
 
     }
-    func formatLogMessage(message:String) -> String {
-        return formatLogMessage(message: message, date:Date())
-    }
     
-    func formatLogMessage(message:String, date:Date) -> String {
+    func formatLogMessage(message:String, date:Date = Date()) -> String {
         let timeStamp = dateString(date: date)
+        let machineName = getMachineName()
         let programName = getProgramName()
-        return "<\(logLevel.rawValue)>\(timeStamp) \(machineName) \(programName): \(message)"
+        return "<22>\(timeStamp) \(machineName) \(programName): \(message)"
     }
 }
