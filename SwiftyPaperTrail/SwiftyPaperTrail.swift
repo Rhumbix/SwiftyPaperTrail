@@ -13,8 +13,8 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     static let sharedInstance = SwiftyPaperTrail()
 
     // Papertrail Destination
-    var host:String!
-    var port:Int!
+    var host:String?
+    var port:Int?
     
     // TCP vs UDP
     var useTCP:Bool = true
@@ -22,61 +22,127 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     // Encryption for TCP
     var useTLS:Bool = true
     
-    // Should logger emit informational logs
-    var debug:Bool = true
-    
-    // Defaults to vendor identifier UUID
-    var machineName:String?
-    
-    // Defaults to "AppName-AppVersion"
-    var programName:String?
+    // Can customize the formatter
+    var syslogFormatter = SyslogFormatter()
     
     // Sockets using CocoaAsyncSocket
-    var tcpSocket:GCDAsyncSocket?
-    var udpSocket:GCDAsyncUdpSocket?
+    private var tcpSocket:GCDAsyncSocket?
+    private var udpSocket:GCDAsyncUdpSocket?
     
-    private func validatesSyslogFormat(message:String) throws {
-        let pattern = "<\\d{2}>.+ .+ .+:.{0,}"
+    private func validatesSyslogFormat(message:String) -> Bool {
+        let pattern = "<22>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: message, options: [], range: NSRange(location: 0, length: message.characters.count))
         
         if matches.isEmpty {
-            throw SwiftyPaperTrailError.syslogFormatInvalid
+            return true
+        } else {
+            print("Format does not comply with Syslog Formatting")
+            return false
         }
     }
     
-    enum SwiftyPaperTrailError: Error {
-        case syslogFormatInvalid
+    private func validatesConfiguration() -> Bool {
+        if host == nil {
+            print("Papertrail Host not configured")
+            return false
+        }
+        if port == nil {
+            print("Papertrail Port not configured")
+            return false
+        }
+        return true
     }
     
     func disconnect() {
-        //        if self.tcpSocket != nil {
-        //            self.tcpSocket.disconnect()
-        //            self.tcpSocket = nil
-        //        } else if self.udpSocket != nil {
-        //            udpSocket.disconnect()
-        //            self.tcpSocket = nil
-        //        }
+        let queue = DispatchQueue(label: "com.test.LockQueue")
+        queue.sync {
+            if tcpSocket != nil {
+                tcpSocket!.disconnect()
+                tcpSocket = nil
+            } else if udpSocket != nil {
+                udpSocket!.close()
+                udpSocket = nil
+            }
+        }
     }
     
-    func logMessage(message: String) {
-        let formattedMessage = SyslogFormatter.sharedInstance.formatLogMessage(message: message)
+    func logMessage(message: String, date:Date = Date()) {
+        if !validatesConfiguration() || !validatesSyslogFormat(message: message) {
+            return
+        }
+        let syslogMessage = syslogFormatter.formatLogMessage(message: message, date: date)
+        guard let data = syslogMessage.data(using: String.Encoding.utf8) else {
+            print("Something went wrong")
+            return
+        }
         
-//        guard validatesSyslogFormat(message: formattedMessage) else {
-//            throw SwiftyPaperTrailError.syslogFormatInvalid
-//        }
+        if useTCP {
+            print("Using TCP")
+            sendLogOverTCP(data: data)
+        } else {
+            print("Using UDP")
+            sendLogOverUDP(data: data)
+        }
         
     }
     
-    func sendLogOverUDP(message:String) {
-        let syslogMessage = SyslogFormatter.sharedInstance.formatLogMessage(message: message)
-        host = "logs2.papertrailapp.com"
-        port = 29065
-        let data = syslogMessage.data(using: String.Encoding.utf8)!
+    private func sendLogOverTCP(data:Data) {
+        if tcpSocket == nil {
+            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
+            print(tcpSocket?.delegate)
+            connectTCPSocket()
+
+        }
+
+        print("Sending via TCP")
+        tcpSocket!.write(data, withTimeout: -1, tag: 1)
+    }
+    
+    private func connectTCPSocket() {
         
-        udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
-        udpSocket?.send(data, toHost: host, port: UInt16(port), withTimeout: -1, tag: 1)
+        do {
+            print("Connecting TCP")
+            try tcpSocket!.connect(toHost: host!, onPort: UInt16(port!))
+        } catch let error {
+            print("Error connecting to host: \(host!). Error: \(error.localizedDescription)")
+            return
+        }
         
+        if useTLS {
+            print("Using TLS")
+            tcpSocket!.startTLS(nil)
+        }
+        
+    }
+    
+    private func sendLogOverUDP(data:Data) {
+        if udpSocket == nil {
+            udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
+        }
+        print("Sending via UDP")
+        udpSocket!.send(data, toHost: host!, port: UInt16(port!), withTimeout: -1, tag: 1)
+    }
+    
+    /*
+        GCDAsyncDelegate Methods
+    */
+    
+    func socketDidSecure(_ sock: GCDAsyncSocket) {
+        print("Socket Secured")
+    }
+    
+    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        print("Connected to \(host):\(port)")
+    }
+    
+    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+        print("Socket Disconnected. Error: \(err)")
+    }
+    
+    
+    func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
+        print("Socket wrote data")
     }
 
 }
