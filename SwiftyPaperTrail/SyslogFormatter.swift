@@ -78,6 +78,6 @@ class SyslogFormatter: NSObject {
         let timeStamp = dateString(date: date)
         let machineName = getMachineName()
         let programName = getProgramName()
-        return "<22>\(timeStamp) \(machineName) \(programName): \(message)"
+        return "<14>\(timeStamp) \(machineName) \(programName): \(message)"
     }
 }

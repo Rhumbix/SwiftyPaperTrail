@@ -17,7 +17,7 @@ class SyslogFormatterTests: XCTestCase {
     
     func testDefaultSyslogFormat() {
         let formattedString = SyslogFormatter.sharedInstance.formatLogMessage(message: "Testing Message")
-        let pattern = "<22>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
+        let pattern = "<14>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
         
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: formattedString, options: [], range: NSRange(location: 0, length: formattedString.characters.count))
@@ -29,7 +29,7 @@ class SyslogFormatterTests: XCTestCase {
         let customMachineName = "My-Custom-Machine-Name"
         SyslogFormatter.sharedInstance.machineName = customMachineName
         let formattedString = SyslogFormatter.sharedInstance.formatLogMessage(message: "Testing Machine Name Change")
-        let pattern = "<22>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} \(customMachineName) .+:.*"
+        let pattern = "<14>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} \(customMachineName) .+:.*"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: formattedString, options: [], range: NSRange(location: 0, length: formattedString.characters.count))
         
@@ -40,7 +40,7 @@ class SyslogFormatterTests: XCTestCase {
         let customProgramName = "My-Custom-Program-Name"
         SyslogFormatter.sharedInstance.programName = customProgramName
         let formattedString = SyslogFormatter.sharedInstance.formatLogMessage(message: "Testing Program Name Change")
-        let pattern = "<22>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ \(customProgramName):.*"
+        let pattern = "<14>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ \(customProgramName):.*"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: formattedString, options: [], range: NSRange(location: 0, length: formattedString.characters.count))
         

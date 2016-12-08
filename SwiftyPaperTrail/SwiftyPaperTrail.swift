@@ -22,6 +22,9 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     // Encryption for TCP
     var useTLS:Bool = true
     
+    // Callbacks
+    var callbackDict:[Int:()->()] = [:]
+    
     // Can customize the formatter
     var syslogFormatter = SyslogFormatter()
     
@@ -30,14 +33,14 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     private var udpSocket:GCDAsyncUdpSocket?
     
     private func validatesSyslogFormat(message:String) -> Bool {
-        let pattern = "<22>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
+        let pattern = "<14>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: message, options: [], range: NSRange(location: 0, length: message.characters.count))
         
         if matches.isEmpty {
             return true
         } else {
-            print("Format does not comply with Syslog Formatting")
+            print("Format does not comply with Papertrail Syslog Formatting")
             return false
         }
     }
@@ -55,19 +58,16 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     }
     
     func disconnect() {
-        let queue = DispatchQueue(label: "com.test.LockQueue")
-        queue.sync {
-            if tcpSocket != nil {
-                tcpSocket!.disconnect()
-                tcpSocket = nil
-            } else if udpSocket != nil {
-                udpSocket!.close()
-                udpSocket = nil
-            }
+        if tcpSocket != nil {
+            tcpSocket!.disconnect()
+            tcpSocket = nil
+        } else if udpSocket != nil {
+            udpSocket!.close()
+            udpSocket = nil
         }
     }
     
-    func logMessage(message: String, date:Date = Date()) {
+    func logMessage(message: String, date:Date = Date(), callBack:(() -> ())?=nil) {
         if !validatesConfiguration() || !validatesSyslogFormat(message: message) {
             return
         }
@@ -76,31 +76,41 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
             print("Something went wrong")
             return
         }
+        let tag = generateCallbackKey()
+        if let cb = callBack {
+            callbackDict[tag] = cb
+        }
+        print("Message to send: \(syslogMessage)")
         
         if useTCP {
             print("Using TCP")
-            sendLogOverTCP(data: data)
+            sendLogOverTCP(data: data, tag: tag)
         } else {
             print("Using UDP")
-            sendLogOverUDP(data: data)
+            sendLogOverUDP(data: data, tag: tag)
         }
-        
     }
     
-    private func sendLogOverTCP(data:Data) {
-        if tcpSocket == nil {
-            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
-            print(tcpSocket?.delegate)
-            connectTCPSocket()
+    private func generateCallbackKey() -> Int{
+        var key:Int = Int(exactly: arc4random())!
+        while callbackDict[key] != nil {
+            key = Int(exactly: arc4random())!
+        }
+        return key
+    }
 
+    
+    private func sendLogOverTCP(data:Data, tag:Int) {
+        if tcpSocket == nil {
+            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.global(qos: .background))
+            connectTCPSocket()
         }
 
         print("Sending via TCP")
-        tcpSocket!.write(data, withTimeout: -1, tag: 1)
+        tcpSocket!.write(data, withTimeout: 1, tag: tag)
     }
     
     private func connectTCPSocket() {
-        
         do {
             print("Connecting TCP")
             try tcpSocket!.connect(toHost: host!, onPort: UInt16(port!))
@@ -116,16 +126,16 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
         
     }
     
-    private func sendLogOverUDP(data:Data) {
+    private func sendLogOverUDP(data:Data, tag:Int) {
         if udpSocket == nil {
             udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         }
         print("Sending via UDP")
-        udpSocket!.send(data, toHost: host!, port: UInt16(port!), withTimeout: -1, tag: 1)
+        udpSocket!.send(data, toHost: host!, port: UInt16(port!), withTimeout: -1, tag: tag)
     }
     
     /*
-        GCDAsyncDelegate Methods
+        GCDAsyncSocketDelegate Methods
     */
     
     func socketDidSecure(_ sock: GCDAsyncSocket) {
@@ -134,15 +144,32 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     
     func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
         print("Connected to \(host):\(port)")
+        logMessage(message: "Connected via TCP")
     }
     
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
         print("Socket Disconnected. Error: \(err)")
     }
     
-    
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        print("Socket wrote data")
+        print("TCP Sent with tag: \(tag)")
+        print(sock.isConnected)
+        sleep(3)
+        if let callBack = callbackDict[tag] {
+            callBack()
+        }
     }
-
+    
+    
+    /*
+     GCDAsyncUdpSocketDelegate Methods
+     */
+    
+    func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
+        print("UDP Sent with tag: \(tag)")
+        if let callBack = callbackDict[tag] {
+            callBack()
+        }
+    }
+    
 }

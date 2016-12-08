@@ -24,26 +24,59 @@ class SwiftyPaperTrailTests: XCTestCase {
         let pt = SwiftyPaperTrail()
         pt.host = "logs2.papertrailapp.com"
         pt.port = 29065
+        pt.useTCP = true
         pt.useTLS = false
-        pt.logMessage(message: "Testing TCP without TLS")
-        pt.disconnect()
+        
+        let tcpSent = expectation(description: "TCP without TLS data sent")
+        pt.logMessage(message: "Testing TCP without TLS", callBack: {
+            print("MADE IT HERE")
+        })
+        sleep(4)
+        tcpSent.fulfill()
+
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+                pt.disconnect()
+            }
+        }
     }
     
     func testSendsViaTCPwithTLS(){
         print("Testing TCP with TLS")
-        SwiftyPaperTrail.sharedInstance.host = "logs2.papertrailapp.com"
-        SwiftyPaperTrail.sharedInstance.port = 29065
-        SwiftyPaperTrail.sharedInstance.useTLS = true
-        SwiftyPaperTrail.sharedInstance.logMessage(message: "Testing TCP with TLS")
-        SwiftyPaperTrail.sharedInstance.disconnect()
+        let pt = SwiftyPaperTrail()
+        pt.host = "logs2.papertrailapp.com"
+        pt.port = 29065
+        pt.useTCP = true
+        pt.useTLS = true
+        
+        let tcpSent = expectation(description: "TCP with TLS data sent")
+        pt.logMessage(message: "Testing TCP with TLS", callBack: {
+            tcpSent.fulfill()
+        })
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+        
     }
     
     func testSendsViaUDP() {
-        SwiftyPaperTrail.sharedInstance.host = "logs2.papertrailapp.com"
-        SwiftyPaperTrail.sharedInstance.port = 29065
-        SwiftyPaperTrail.sharedInstance.useTCP = false
-        SwiftyPaperTrail.sharedInstance.logMessage(message: "Testing UDP.")
-        SwiftyPaperTrail.sharedInstance.disconnect()
+        let pt = SwiftyPaperTrail()
+        pt.host = "logs2.papertrailapp.com"
+        pt.port = 29065
+        pt.useTCP = false
+        
+        let udpSent = expectation(description: "UDP data sent")
+        pt.logMessage(message: "Testing UDP", callBack: {
+            udpSent.fulfill()
+        })
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
     }
     
     
