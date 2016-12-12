@@ -55,19 +55,6 @@ class BufferingClient : NSObject, GCDAsyncSocketDelegate {
 }
 
 class SwiftyPaperTrailTests: XCTestCase {
-
-    func getCurrentMillis()->Int64 {
-        return Int64(Date().timeIntervalSince1970 * 1000)
-    }
-
-    func testDoesntLogWithoutConfiguration() {
-
-    }
-    
-    func testDoesntLogWithInvalidFormat(){
-        
-    }
-    
     func testSendsViaTCPwithoutTLS(){
         print("Testing TCP without TLS")
         let buffer = BufferingService()
@@ -95,41 +82,45 @@ class SwiftyPaperTrailTests: XCTestCase {
             XCTAssertTrue(sent!.hasSuffix("Testing TCP without TLS"))
         }
     }
-    
+}
+
+class PendingTests {
     func testSendsViaTCPwithTLS(){
+        let buffer = BufferingService()
+        let port = buffer.awaitData()
+
         print("Testing TCP with TLS")
         let pt = SwiftyPaperTrail()
-        pt.host = "logs2.papertrailapp.com"
-        pt.port = 29065
+        pt.host = "localhost"
+        pt.port = Int(port)
         pt.useTCP = true
         pt.useTLS = true
         
-        let tcpSent = expectation(description: "TCP with TLS data sent")
-        pt.logMessage(message: "Testing TCP with TLS", callBack: {
-            tcpSent.fulfill()
-        })
-        waitForExpectations(timeout: 5) { error in
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-        }
-        
+//        let tcpSent = expectation(description: "TCP with TLS data sent")
+//        pt.logMessage(message: "Testing TCP with TLS", callBack: {
+//            tcpSent.fulfill()
+//        })
+//        waitForExpectations(timeout: 5) { error in
+//            if let error = error {
+//                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+//            }
+//        }
     }
-    
+
     func testSendsViaUDP() {
         let pt = SwiftyPaperTrail()
         pt.host = "logs2.papertrailapp.com"
         pt.port = 29065
         pt.useTCP = false
         
-        let udpSent = expectation(description: "UDP data sent")
-        pt.logMessage(message: "Testing UDP", callBack: {
-            udpSent.fulfill()
-        })
-        waitForExpectations(timeout: 5) { error in
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-        }
+//        let udpSent = expectation(description: "UDP data sent")
+//        pt.logMessage(message: "Testing UDP", callBack: {
+//            udpSent.fulfill()
+//        })
+//        waitForExpectations(timeout: 5) { error in
+//            if let error = error {
+//                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+//            }
+//        }
     }
 }
