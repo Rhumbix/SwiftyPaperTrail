@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0B66C751DFF500B00FA0803 /* BufferingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B66C741DFF500B00FA0803 /* BufferingService.swift */; };
 		A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
 		A9A0905E1DF0EB9100E133BC /* SyslogFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */; };
 		A9A0905F1DF0EC0200E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
@@ -35,6 +36,7 @@
 		59EDC1C749A533B4DBEAEA54 /* Pods_SwiftyPaperTrailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyPaperTrailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail.debug.xcconfig"; sourceTree = "<group>"; };
 		8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A0B66C741DFF500B00FA0803 /* BufferingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingService.swift; sourceTree = "<group>"; };
 		A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatter.swift; sourceTree = "<group>"; };
 		A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatterTests.swift; sourceTree = "<group>"; };
 		A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyLogMessage.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				A9CC5B231DEF66DB003AD86A /* SwiftyPaperTrailTests.swift */,
 				A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */,
 				A9CC5B251DEF66DB003AD86A /* Info.plist */,
+				A0B66C741DFF500B00FA0803 /* BufferingService.swift */,
 			);
 			path = SwiftyPaperTrailTests;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				A9A0905F1DF0EC0200E133BC /* SyslogFormatter.swift in Sources */,
 				A9A090651DF0F3BA00E133BC /* SwiftyLogMessage.swift in Sources */,
 				A9CC5B241DEF66DB003AD86A /* SwiftyPaperTrailTests.swift in Sources */,
+				A0B66C751DFF500B00FA0803 /* BufferingService.swift in Sources */,
 				A9CC5B311DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

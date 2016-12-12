@@ -113,12 +113,7 @@ class SwiftyPaperTrail : NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDele
             connectTCPSocket()
         }
 
-        print("Sending via TCP")
-//        if( connected ){
-            tcpSocket!.write(data, withTimeout: -1, tag: tag)
-//        } else {
-//            pending.append(data)
-//        }
+        tcpSocket!.write(data, withTimeout: -1, tag: tag)
     }
     
     private func connectTCPSocket() {
