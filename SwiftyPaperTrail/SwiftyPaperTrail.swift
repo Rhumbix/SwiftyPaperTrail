@@ -9,7 +9,7 @@
 import Foundation
 import CocoaAsyncSocket
 
-class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelegate {
+class SwiftyPaperTrail : NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelegate {
     static let sharedInstance = SwiftyPaperTrail()
 
     // Papertrail Destination
@@ -27,7 +27,7 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     
     // Can customize the formatter
     var syslogFormatter = SyslogFormatter()
-    
+
     // Sockets using CocoaAsyncSocket
     private var tcpSocket:GCDAsyncSocket?
     private var udpSocket:GCDAsyncUdpSocket?
@@ -59,12 +59,19 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     
     func disconnect() {
         if tcpSocket != nil {
-            tcpSocket!.disconnect()
+            tcpSocket!.disconnectAfterReadingAndWriting()
             tcpSocket = nil
         } else if udpSocket != nil {
             udpSocket!.close()
             udpSocket = nil
         }
+    }
+
+    var disconnectionListener : ( (SwiftyPaperTrail) -> Void )?
+
+    func disconnect(on whenComplete : @escaping (SwiftyPaperTrail) -> Void ) {
+        disconnectionListener = whenComplete
+        disconnect()
     }
     
     func logMessage(message: String, date:Date = Date(), callBack:(() -> ())?=nil) {
@@ -107,7 +114,11 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
         }
 
         print("Sending via TCP")
-        tcpSocket!.write(data, withTimeout: 1, tag: tag)
+//        if( connected ){
+            tcpSocket!.write(data, withTimeout: -1, tag: tag)
+//        } else {
+//            pending.append(data)
+//        }
     }
     
     private func connectTCPSocket() {
@@ -144,17 +155,18 @@ class SwiftyPaperTrail:NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelega
     
     func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
         print("Connected to \(host):\(port)")
-        logMessage(message: "Connected via TCP")
     }
     
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
         print("Socket Disconnected. Error: \(err)")
+        if let listener = disconnectionListener {
+            listener(self)
+        }
     }
     
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
         print("TCP Sent with tag: \(tag)")
         print(sock.isConnected)
-        sleep(3)
         if let callBack = callbackDict[tag] {
             callBack()
         }

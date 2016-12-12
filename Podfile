@@ -7,7 +7,5 @@ target 'SwiftyPaperTrail' do
 
   target 'SwiftyPaperTrailTests' do
     inherit! :search_paths
-    # Pods for testing
   end
-
 end
