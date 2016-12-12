@@ -3,4 +3,4 @@ os: osx
 osx_image: xcode8.1
 xcode_workspace: SwiftyPaperTrail.xcworkspace
 xcode_scheme: SwiftyPaperTrail
-before_install: pod install
+before_script: pod install
