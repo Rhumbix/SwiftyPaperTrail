@@ -23,7 +23,7 @@ class SwiftyPaperTrail : NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDele
     var useTLS:Bool = true
     
     // Callbacks
-    var callbackDict:[Int:()->()] = [:]
+    var callbacks = TaggedCallbacks()
     
     // Can customize the formatter
     var syslogFormatter = SyslogFormatter()
@@ -83,10 +83,7 @@ class SwiftyPaperTrail : NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDele
             print("Something went wrong")
             return
         }
-        let tag = generateCallbackKey()
-        if let cb = callBack {
-            callbackDict[tag] = cb
-        }
+        let tag = callbacks.registerCallback( optionalCallback: callBack )
         print("Message to send: \(syslogMessage)")
         
         if useTCP {
@@ -97,15 +94,6 @@ class SwiftyPaperTrail : NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDele
             sendLogOverUDP(data: data, tag: tag)
         }
     }
-    
-    private func generateCallbackKey() -> Int{
-        var key:Int = Int(exactly: arc4random())!
-        while callbackDict[key] != nil {
-            key = Int(exactly: arc4random())!
-        }
-        return key
-    }
-
     
     private func sendLogOverTCP(data:Data, tag:Int) {
         if tcpSocket == nil {
@@ -160,23 +148,15 @@ class SwiftyPaperTrail : NSObject, GCDAsyncSocketDelegate, GCDAsyncUdpSocketDele
     }
     
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        print("TCP Sent with tag: \(tag)")
-        print(sock.isConnected)
-        if let callBack = callbackDict[tag] {
-            callBack()
-        }
+        callbacks.completed(tag: tag)
     }
-    
-    
+
     /*
      GCDAsyncUdpSocketDelegate Methods
      */
     
     func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
-        print("UDP Sent with tag: \(tag)")
-        if let callBack = callbackDict[tag] {
-            callBack()
-        }
+        callbacks.completed(tag: tag)
     }
     
 }
