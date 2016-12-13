@@ -23,7 +23,7 @@ import UIKit
     programName
 */
 
-class SyslogFormatter: NSObject {
+class SyslogFormatter {
     static let sharedInstance = SyslogFormatter()
     
     var machineName:String?
@@ -31,7 +31,7 @@ class SyslogFormatter: NSObject {
     private var dateFormat:String = "yyyy-MM-dd'T'HH:mm:ss"
     private var dateFormatter:DateFormatter!
     
-    override init() {
+    init() {
         dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
     }
