@@ -1,6 +1,6 @@
 language: objective-c
 os: osx
 osx_image: xcode8.1
-xcode_workspace: SwiftyPaperTrail.xcworkspace
-xcode_scheme: SwiftyPaperTrail
-before_script: pod install
+script:
+- set -o pipefail && xcodebuild test -workspace Example/SwiftyPaperTrail.xcworkspace -scheme SwiftyPaperTrail-Example -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' ONLY_ACTIVE_ARCH=NO | xcpretty
+- pod lib lint

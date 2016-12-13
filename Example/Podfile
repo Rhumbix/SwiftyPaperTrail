@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SwiftyPaperTrail_Example' do
+  pod 'SwiftyPaperTrail', :path => '../'
+
+  target 'SwiftyPaperTrail_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
