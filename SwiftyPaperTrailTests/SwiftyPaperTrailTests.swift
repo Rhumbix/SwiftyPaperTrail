@@ -17,17 +17,14 @@ class SwiftyPaperTrailTests: XCTestCase {
         let port = buffer.awaitData()
 
         let pt = SwiftyPaperTrail()
-        pt.host = "localhost"
-        pt.port = Int(port)
-        pt.useTCP = true
-        pt.useTLS = false
+        pt.transport = TCPTransport(to: "localhost", at: port)
 
         let sendSync = expectation(description: "Sending data")
         pt.logMessage(message: "Testing TCP without TLS", callBack: {
             sendSync.fulfill()
         })
 
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 5) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
                 return
@@ -41,16 +38,11 @@ class SwiftyPaperTrailTests: XCTestCase {
 
 class PendingTests {
     func testSendsViaTCPwithTLS(){
-        let buffer = BufferingService()
-        let port = buffer.awaitData()
-
-        print("Testing TCP with TLS")
-        let pt = SwiftyPaperTrail()
-        pt.host = "localhost"
-        pt.port = Int(port)
-        pt.useTCP = true
-        pt.useTLS = true
-        
+//        let buffer = BufferingService()
+//        let port = buffer.awaitData()
+//
+//        print("Testing TCP with TLS")
+//        let pt = SwiftyPaperTrail()
 //        let tcpSent = expectation(description: "TCP with TLS data sent")
 //        pt.logMessage(message: "Testing TCP with TLS", callBack: {
 //            tcpSent.fulfill()
@@ -63,11 +55,7 @@ class PendingTests {
     }
 
     func testSendsViaUDP() {
-        let pt = SwiftyPaperTrail()
-        pt.host = "logs2.papertrailapp.com"
-        pt.port = 29065
-        pt.useTCP = false
-        
+//        let pt = SwiftyPaperTrail()
 //        let udpSent = expectation(description: "UDP data sent")
 //        pt.logMessage(message: "Testing UDP", callBack: {
 //            udpSent.fulfill()

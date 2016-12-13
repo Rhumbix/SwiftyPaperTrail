@@ -21,7 +21,6 @@ class BufferingService : NSObject, GCDAsyncSocketDelegate {
     }
 
     func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
-        print("New client")
         let target = Data()
         let client = BufferingClient(clientSocket: newSocket, target: target)
         buffers.append(client)
