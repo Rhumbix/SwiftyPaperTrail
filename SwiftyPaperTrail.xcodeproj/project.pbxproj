@@ -10,6 +10,7 @@
 		A0B66C751DFF500B00FA0803 /* BufferingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B66C741DFF500B00FA0803 /* BufferingService.swift */; };
 		A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */; };
 		A0BE75501DFF7EC800570263 /* TaggedCallbacksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */; };
+		A0BE75521E00771300570263 /* LogWireTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE75511E00771300570263 /* LogWireTransport.swift */; };
 		A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
 		A9A0905E1DF0EB9100E133BC /* SyslogFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */; };
 		A9A0905F1DF0EC0200E133BC /* SyslogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */; };
@@ -40,6 +41,7 @@
 		A0B66C741DFF500B00FA0803 /* BufferingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingService.swift; sourceTree = "<group>"; };
 		A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedCallbacks.swift; sourceTree = "<group>"; };
 		A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedCallbacksTests.swift; sourceTree = "<group>"; };
+		A0BE75511E00771300570263 /* LogWireTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWireTransport.swift; sourceTree = "<group>"; };
 		A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatter.swift; sourceTree = "<group>"; };
 		A9A0905D1DF0EB9100E133BC /* SyslogFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyslogFormatterTests.swift; sourceTree = "<group>"; };
 		A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyLogMessage.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */,
 				A9A090631DF0F3BA00E133BC /* SwiftyLogMessage.swift */,
 				A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */,
+				A0BE75511E00771300570263 /* LogWireTransport.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */,
+				A0BE75521E00771300570263 /* LogWireTransport.swift in Sources */,
 				A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
 				A9A090641DF0F3BA00E133BC /* SwiftyLogMessage.swift in Sources */,
 				A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */,
