@@ -10,14 +10,38 @@ import SwiftyLogger
 
 public class SwiftyPaperTrail : LoggerTarget {
 
-    
-    public var minimumLogLevel: LogLevel?
+    //TODO: Figure out better paradigm
+    private var _minimumLogLevel : LogLevel?
+    public var minimumLogLevel: LogLevel? {
+        get { return _minimumLogLevel }
+        set { _minimumLogLevel = newValue }
+    }
 
-    public var messageFormatter: LogMessageFormatter?
+    private var _messageFormatter : LogMessageFormatter?
+    public var messageFormatter : LogMessageFormatter? {
+        get { return _messageFormatter }
+        set { _messageFormatter = newValue }
+    }
 
-    public var isAsync: Bool = true
+    private var _isAsync : Bool = true
+    public var isAsync : Bool {
+        get { return _isAsync }
+        //TODO: Find more graceful method of dealing with this.
+        set {
+            if !newValue {
+                print("SwityPaperTrail doesn't allow synchronous output")
+                abort()
+            }
+        }
+    }
 
-    public var queue: DispatchQueue { get { return transport.queue } set { /* TODO: This should probably do something */ } }
+    public var queue: DispatchQueue {
+        get { return transport.queue }
+        set {
+            print("SwityPaperTrail doesn't allow changing queues")
+            abort()
+        }
+    }
     
     // Can customize the formatter
     var syslogFormatter = SyslogFormatter()
