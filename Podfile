@@ -5,7 +5,7 @@ project 'SwiftyPaperTrail.xcodeproj'
 target 'SwiftyPaperTrail' do
   use_frameworks!
   pod 'CocoaAsyncSocket', '7.5.1'
-  pod 'SwiftyLogger', '2.0.2'
+  pod 'SwiftyLogger', '2.0.4'
 
   target 'SwiftyPaperTrailTests' do
     inherit! :search_paths
