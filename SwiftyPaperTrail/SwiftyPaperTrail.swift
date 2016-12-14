@@ -11,14 +11,14 @@ import SwiftyLogger
 public class SwiftyPaperTrail : LoggerTarget {
 
     //TODO: Figure out better paradigm
-    private var _minimumLogLevel : LogLevel?
-    public var minimumLogLevel: LogLevel? {
+    private var _minimumLogLevel : SwiftyLogger.LogLevel?
+    public var minimumLogLevel: SwiftyLogger.LogLevel? {
         get { return _minimumLogLevel }
         set { _minimumLogLevel = newValue }
     }
 
-    private var _messageFormatter : LogMessageFormatter?
-    public var messageFormatter : LogMessageFormatter? {
+    private var _messageFormatter : SwiftyLogger.LogMessageFormatter?
+    public var messageFormatter : SwiftyLogger.LogMessageFormatter? {
         get { return _messageFormatter }
         set { _messageFormatter = newValue }
     }
@@ -70,7 +70,7 @@ public class SwiftyPaperTrail : LoggerTarget {
         transport.disconnect()
     }
 
-    public func log(formattedMessage: String) {
+    public func log(formattedMessage: String) -> Void {
         logMessage(message: formattedMessage, date: Date(), callBack: nil)
     }
 

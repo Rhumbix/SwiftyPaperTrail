@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyPaperTrail'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'SwiftyLogger Papertrail adapter.'
 
   s.description      = <<-DESC
