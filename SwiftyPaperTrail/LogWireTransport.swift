@@ -35,10 +35,10 @@ public class BufferingTransport : LogWireTrasnport {
 
 public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     private var tcpSocket:GCDAsyncSocket?
-    var host : String
-    var port : UInt16
-    var callbacks = TaggedCallbacks()
-    var disconnectionListener : ( (TCPTransport) -> Void )?
+    private var host : String
+    private var port : UInt16
+    private var callbacks = TaggedCallbacks()
+    public var disconnectionListener : ( (TCPTransport) -> Void )?
 
     public var queue : DispatchQueue { get { return defaultDispatchQueue } }
 
@@ -52,7 +52,7 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 
     public func sendData( data : Data, callback : (() -> Void)? ) {
         if tcpSocket == nil {
-            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: defaultDispatchQueue, socketQueue: defaultDispatchQueue)
+            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: defaultDispatchQueue, socketQueue: queue)
             connectTCPSocket()
         }
         let tag = callbacks.registerCallback(optionalCallback: callback)
@@ -61,15 +61,14 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 
     private func connectTCPSocket() {
         do {
-            print("Connecting TCP")
             try tcpSocket!.connect(toHost: host, onPort: UInt16(port))
         } catch let error {
+            //TODO: Add handler mechanism for this
             print("Error connecting to host: \(host). Error: \(error.localizedDescription)")
             return
         }
 
         if useTLS {
-            print("Using TLS")
             tcpSocket!.startTLS(nil)
         }
 
@@ -81,21 +80,8 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     }
 
     //Delegate methods
-    @objc public func socketDidSecure(_ sock: GCDAsyncSocket) {
-        print("Socket Secured")
-    }
-
-    @objc public func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
-        print("Connected to \(host):\(port)")
-    }
-
     @objc public func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-        print("Socket Disconnected. Error: \(err)")
         disconnectionListener?(self)
-    }
-
-    @objc public func socket(_ sock: GCDAsyncSocket, didWritePartialDataOfLength partialLength: UInt, tag: Int) {
-        print("Partial write")
     }
 
     @objc public func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
