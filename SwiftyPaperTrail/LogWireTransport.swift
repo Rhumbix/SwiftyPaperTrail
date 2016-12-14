@@ -103,13 +103,28 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     }
 }
 
+extension SwiftyPaperTrail {
+    public class func withTCP( to aHost : String, at aPort : UInt16 ) -> SwiftyPaperTrail {
+        let tcpLayer = TCPTransport(to: aHost, at: aPort )
+        let logger = SwiftyPaperTrail.init(wireLayer: tcpLayer)
+        return logger
+    }
+
+    public class func withTLSoverTCP( to aHost : String, at aPort : UInt16 ) -> SwiftyPaperTrail {
+        let tcpLayer = TCPTransport(to: aHost, at: aPort )
+        tcpLayer.useTLS = true
+        let logger = SwiftyPaperTrail.init(wireLayer: tcpLayer)
+        return logger
+    }
+}
+
 public class UDPTransport : NSObject, GCDAsyncUdpSocketDelegate, LogWireTrasnport  {
     public var queue: DispatchQueue { get{ return defaultDispatchQueue } }
 
     private var udpSocket:GCDAsyncUdpSocket?
-    var host:String?
-    var port:Int?
-    var callbacks = TaggedCallbacks()
+    internal var host:String?
+    internal var port:Int?
+    private var callbacks = TaggedCallbacks()
 
     public func disconnect() {
         udpSocket!.close()
@@ -129,5 +144,15 @@ public class UDPTransport : NSObject, GCDAsyncUdpSocketDelegate, LogWireTrasnpor
      */
     @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
         callbacks.completed(tag: tag)
+    }
+}
+
+extension SwiftyPaperTrail {
+    public class func withUDP( to aHost : String, at aPort : UInt16 ) -> SwiftyPaperTrail {
+        let udpLayer = UDPTransport()
+        udpLayer.host = aHost
+        udpLayer.port = Int(aPort)
+        let logger = SwiftyPaperTrail.init(wireLayer: udpLayer)
+        return logger
     }
 }
