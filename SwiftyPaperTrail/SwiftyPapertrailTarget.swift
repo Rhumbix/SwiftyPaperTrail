@@ -7,8 +7,8 @@
 //
 
 import Foundation
+import SwiftyLogger
 
-
-class SwiftyLogMessage {
+class PaperTrailTarget : LoggerTarget {
 
 }

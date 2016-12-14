@@ -20,8 +20,9 @@ Adapter from SwiftyLogger to Papertrail via nonblocking socket operation.s
   s.author           = { 'Mark Eschbach' => 'mark@rhumbix.com' }
   s.source           = { :git => 'https://github.com/Rhumbix/SwiftyPaperTrail.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '8.3'
 
   s.source_files = 'SwiftyPaperTrail/**/*'
-  s.dependency 'CocoaAsyncSocket'
+  s.dependency 'CocoaAsyncSocket', '>= 7.5'
+  s.dependency 'SwiftyLogger', '>= 2.0'
 end

@@ -16,9 +16,7 @@ class SwiftyPaperTrailTests: XCTestCase {
         let buffer = BufferingService()
         let port = buffer.awaitData()
 
-        let pt = SwiftyPaperTrail()
-        pt.transport = TCPTransport(to: "localhost", at: port)
-
+        let pt = SwiftyPaperTrail(wireLayer: TCPTransport(to: "localhost", at: port))
         let sendSync = expectation(description: "Sending data")
         pt.logMessage(message: "Testing TCP without TLS", callBack: {
             sendSync.fulfill()

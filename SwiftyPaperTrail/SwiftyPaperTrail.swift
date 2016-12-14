@@ -6,18 +6,29 @@
 //  Copyright © 2016 Rhumbix, Inc. All rights reserved.
 //
 
-import Foundation
+import SwiftyLogger
 
-class SwiftyPaperTrail {
-    // Callbacks
-    var callbacks = TaggedCallbacks()
+public class SwiftyPaperTrail : LoggerTarget {
+
+    
+    public var minimumLogLevel: LogLevel?
+
+    public var messageFormatter: LogMessageFormatter?
+
+    public var isAsync: Bool = true
+
+    public var queue: DispatchQueue { get { return transport.queue } set { /* TODO: This should probably do something */ } }
     
     // Can customize the formatter
     var syslogFormatter = SyslogFormatter()
 
     // Sockets using CocoaAsyncSocket
-    var transport : LogWireTrasnport!
-    
+    private var transport : LogWireTrasnport
+
+    public init(wireLayer transport : LogWireTrasnport){
+        self.transport = transport
+    }
+
     private func validatesSyslogFormat(message:String) -> Bool {
         let pattern = "<14>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
@@ -31,20 +42,16 @@ class SwiftyPaperTrail {
         }
     }
     
-    private func validatesConfiguration() -> Bool {
-        guard transport != nil else {
-            NSLog("Transport layer was not configured for SwiftyPaperTrail")
-            return false
-        }
-        return true
-    }
-    
     func disconnect() {
         transport.disconnect()
     }
 
+    public func log(formattedMessage: String) {
+        logMessage(message: formattedMessage, date: Date(), callBack: nil)
+    }
+
     func logMessage(message: String, date:Date = Date(), callBack:(() -> Void)?=nil) {
-        if !validatesConfiguration() || !validatesSyslogFormat(message: message) {
+        if !validatesSyslogFormat(message: message) {
             return
         }
 

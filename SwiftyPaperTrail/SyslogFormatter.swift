@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyLogger
 
 /*
     Default formatter. Syslog format is:
