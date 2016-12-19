@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A00C69161E00C77B0032CF7C /* SwiftyLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00C69151E00C77B0032CF7C /* SwiftyLoggerTests.swift */; };
+		A03B58591E088F3700BB23E9 /* TCPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B58581E088F3700BB23E9 /* TCPTransport.swift */; };
+		A03B585B1E088FAA00BB23E9 /* UDPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */; };
 		A0B66C751DFF500B00FA0803 /* BufferingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B66C741DFF500B00FA0803 /* BufferingService.swift */; };
 		A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */; };
 		A0BE75501DFF7EC800570263 /* TaggedCallbacksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */; };
@@ -38,6 +40,8 @@
 		65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail.debug.xcconfig"; sourceTree = "<group>"; };
 		8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A00C69151E00C77B0032CF7C /* SwiftyLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyLoggerTests.swift; sourceTree = "<group>"; };
+		A03B58581E088F3700BB23E9 /* TCPTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPTransport.swift; sourceTree = "<group>"; };
+		A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPTransport.swift; sourceTree = "<group>"; };
 		A0B66C741DFF500B00FA0803 /* BufferingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingService.swift; sourceTree = "<group>"; };
 		A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedCallbacks.swift; sourceTree = "<group>"; };
 		A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedCallbacksTests.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				A9A090541DF0AC1900E133BC /* SyslogFormatter.swift */,
 				A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */,
 				A0BE75511E00771300570263 /* LogWireTransport.swift */,
+				A03B58581E088F3700BB23E9 /* TCPTransport.swift */,
+				A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -340,8 +346,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */,
+				A03B585B1E088FAA00BB23E9 /* UDPTransport.swift in Sources */,
 				A0BE75521E00771300570263 /* LogWireTransport.swift in Sources */,
 				A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
+				A03B58591E088F3700BB23E9 /* TCPTransport.swift in Sources */,
 				A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
