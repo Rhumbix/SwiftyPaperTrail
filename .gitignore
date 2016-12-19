@@ -2,3 +2,4 @@ Pods/
 xcuserdata
 Build/
 DerivedData/
+.DS_Store
