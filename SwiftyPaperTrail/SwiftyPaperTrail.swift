@@ -23,7 +23,7 @@ public class SwiftyPaperTrail : LoggerTarget {
         set { _messageFormatter = newValue }
     }
 
-    private var _isAsync : Bool = true
+    private var _isAsync : Bool = false
     public var isAsync : Bool {
         get { return _isAsync }
         //TODO: Find more graceful method of dealing with this.
@@ -66,7 +66,7 @@ public class SwiftyPaperTrail : LoggerTarget {
         }
     }
     
-    func disconnect() {
+    public func disconnect() {
         transport.disconnect()
     }
 
@@ -75,14 +75,13 @@ public class SwiftyPaperTrail : LoggerTarget {
     }
 
     func logMessage(message: String, date:Date = Date(), callBack:(() -> Void)?=nil) {
+        let syslogMessage = syslogFormatter.formatLogMessage(message: message, date: date)
         if !validatesSyslogFormat(message: message) {
-            return
+            fatalError("Formatting check failed")
         }
 
-        let syslogMessage = syslogFormatter.formatLogMessage(message: message, date: date)
         guard let data = syslogMessage.data(using: String.Encoding.utf8) else {
-            print("Something went wrong")
-            return
+            fatalError("Failed to encode as UTF8")
         }
 
         transport.sendData(data: data, callback: callBack)

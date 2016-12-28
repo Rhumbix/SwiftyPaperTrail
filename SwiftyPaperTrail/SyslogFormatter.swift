@@ -13,6 +13,7 @@ import SwiftyLogger
     Default formatter. Syslog format is:
     \<22\>timestamp machineName programName: message
     22 => Syslog Numerical Code. Papertrail wants RFC-5424's 22 Code: Local Use
+     ^^ The above is wrong.  Priority 22 is actual `mail` facility with at `information`
     timestamp => yyyy-MM-dd'T'HH:mm:ss
         timezone is UTC by default. Papertrail allows you to view the 
         logs in any timezone from settings.

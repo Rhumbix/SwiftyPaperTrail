@@ -20,6 +20,10 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     init( to aHost : String, at aPort : UInt16 ){
         host = aHost
         port = aPort
+        super.init()
+        queue.async {
+            self.connectTCPSocket()
+        }
     }
 
     // Encryption for TCP
@@ -27,7 +31,6 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 
     public func sendData( data : Data, callback : (() -> Void)? ) {
         if tcpSocket == nil {
-            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: defaultDispatchQueue, socketQueue: queue)
             connectTCPSocket()
         }
         let tag = callbacks.registerCallback(optionalCallback: callback)
@@ -36,11 +39,10 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 
     private func connectTCPSocket() {
         do {
+            tcpSocket = GCDAsyncSocket(delegate: self, delegateQueue: defaultDispatchQueue, socketQueue: queue)
             try tcpSocket!.connect(toHost: host, onPort: UInt16(port))
         } catch let error {
-            //TODO: Add handler mechanism for this
-            print("Error connecting to host: \(host). Error: \(error.localizedDescription)")
-            return
+            fatalError("Error connecting to host: \(host). Error: \(error.localizedDescription)")
         }
 
         if useTLS {
@@ -67,6 +69,7 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 extension SwiftyPaperTrail {
     public class func withTCP( to aHost : String, at aPort : UInt16 ) -> SwiftyPaperTrail {
         let tcpLayer = TCPTransport(to: aHost, at: aPort )
+
         let logger = SwiftyPaperTrail.init(wireLayer: tcpLayer)
         return logger
     }

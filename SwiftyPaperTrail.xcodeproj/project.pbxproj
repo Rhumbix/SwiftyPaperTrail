@@ -11,6 +11,12 @@
 		A03B58591E088F3700BB23E9 /* TCPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B58581E088F3700BB23E9 /* TCPTransport.swift */; };
 		A03B585B1E088FAA00BB23E9 /* UDPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */; };
 		A0B66C751DFF500B00FA0803 /* BufferingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B66C741DFF500B00FA0803 /* BufferingService.swift */; };
+		A0B767AB1E12CB7500E37FD7 /* TCPIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B767AA1E12CB7500E37FD7 /* TCPIntegrationTests.swift */; };
+		A0B767AD1E12DC8700E37FD7 /* RFC5424.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B767AC1E12DC8700E37FD7 /* RFC5424.swift */; };
+		A0B767AF1E12DC9000E37FD7 /* RFC5424Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B767AE1E12DC9000E37FD7 /* RFC5424Tests.swift */; };
+		A0B767B11E12DD9C00E37FD7 /* RFC3164.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B767B01E12DD9C00E37FD7 /* RFC3164.swift */; };
+		A0B767B31E12DDA500E37FD7 /* RFC3164Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B767B21E12DDA500E37FD7 /* RFC3164Tests.swift */; };
+		A0B767B51E133AA600E37FD7 /* RFC3339Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B767B41E133AA600E37FD7 /* RFC3339Tests.swift */; };
 		A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */; };
 		A0BE75501DFF7EC800570263 /* TaggedCallbacksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */; };
 		A0BE75521E00771300570263 /* LogWireTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE75511E00771300570263 /* LogWireTransport.swift */; };
@@ -43,6 +49,12 @@
 		A03B58581E088F3700BB23E9 /* TCPTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPTransport.swift; sourceTree = "<group>"; };
 		A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPTransport.swift; sourceTree = "<group>"; };
 		A0B66C741DFF500B00FA0803 /* BufferingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingService.swift; sourceTree = "<group>"; };
+		A0B767AA1E12CB7500E37FD7 /* TCPIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPIntegrationTests.swift; sourceTree = "<group>"; };
+		A0B767AC1E12DC8700E37FD7 /* RFC5424.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFC5424.swift; sourceTree = "<group>"; };
+		A0B767AE1E12DC9000E37FD7 /* RFC5424Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFC5424Tests.swift; sourceTree = "<group>"; };
+		A0B767B01E12DD9C00E37FD7 /* RFC3164.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFC3164.swift; sourceTree = "<group>"; };
+		A0B767B21E12DDA500E37FD7 /* RFC3164Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFC3164Tests.swift; sourceTree = "<group>"; };
+		A0B767B41E133AA600E37FD7 /* RFC3339Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RFC3339Tests.swift; sourceTree = "<group>"; };
 		A0BE754D1DFF7C5700570263 /* TaggedCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedCallbacks.swift; sourceTree = "<group>"; };
 		A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggedCallbacksTests.swift; sourceTree = "<group>"; };
 		A0BE75511E00771300570263 /* LogWireTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWireTransport.swift; sourceTree = "<group>"; };
@@ -121,6 +133,8 @@
 				A0BE75511E00771300570263 /* LogWireTransport.swift */,
 				A03B58581E088F3700BB23E9 /* TCPTransport.swift */,
 				A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */,
+				A0B767B01E12DD9C00E37FD7 /* RFC3164.swift */,
+				A0B767AC1E12DC8700E37FD7 /* RFC5424.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -134,6 +148,10 @@
 				A0B66C741DFF500B00FA0803 /* BufferingService.swift */,
 				A0BE754F1DFF7EC800570263 /* TaggedCallbacksTests.swift */,
 				A00C69151E00C77B0032CF7C /* SwiftyLoggerTests.swift */,
+				A0B767AA1E12CB7500E37FD7 /* TCPIntegrationTests.swift */,
+				A0B767B21E12DDA500E37FD7 /* RFC3164Tests.swift */,
+				A0B767AE1E12DC9000E37FD7 /* RFC5424Tests.swift */,
+				A0B767B41E133AA600E37FD7 /* RFC3339Tests.swift */,
 			);
 			path = SwiftyPaperTrailTests;
 			sourceTree = "<group>";
@@ -346,8 +364,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */,
+				A0B767B11E12DD9C00E37FD7 /* RFC3164.swift in Sources */,
 				A03B585B1E088FAA00BB23E9 /* UDPTransport.swift in Sources */,
 				A0BE75521E00771300570263 /* LogWireTransport.swift in Sources */,
+				A0B767AD1E12DC8700E37FD7 /* RFC5424.swift in Sources */,
 				A9CC5B301DEF6705003AD86A /* SwiftyPaperTrail.swift in Sources */,
 				A03B58591E088F3700BB23E9 /* TCPTransport.swift in Sources */,
 				A9A090551DF0AC1900E133BC /* SyslogFormatter.swift in Sources */,
@@ -358,12 +378,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0B767B31E12DDA500E37FD7 /* RFC3164Tests.swift in Sources */,
+				A0B767B51E133AA600E37FD7 /* RFC3339Tests.swift in Sources */,
 				A9A0905E1DF0EB9100E133BC /* SyslogFormatterTests.swift in Sources */,
 				A00C69161E00C77B0032CF7C /* SwiftyLoggerTests.swift in Sources */,
+				A0B767AF1E12DC9000E37FD7 /* RFC5424Tests.swift in Sources */,
 				A9A0905F1DF0EC0200E133BC /* SyslogFormatter.swift in Sources */,
 				A0BE75501DFF7EC800570263 /* TaggedCallbacksTests.swift in Sources */,
 				A9CC5B241DEF66DB003AD86A /* LogWireTransport.swift in Sources */,
 				A0B66C751DFF500B00FA0803 /* BufferingService.swift in Sources */,
+				A0B767AB1E12CB7500E37FD7 /* TCPIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
