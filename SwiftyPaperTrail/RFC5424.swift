@@ -8,6 +8,45 @@
 
 import Foundation
 
+//As defined in RFC3164 and RFC5424
+public enum SyslogFacilities : UInt8 {
+    case kernel = 0
+    case user = 1
+    case mail = 2
+    case system = 3
+    case security1 = 4
+    case syslogd = 5
+    case line = 6
+    case network = 7
+    case uucp = 8
+    case clock1 = 9
+    case security2 = 10
+    case ftp = 11
+    case ntp = 12
+    case audit = 13
+    case alert = 14
+    case clock2 = 15
+    case local0 = 16
+    case local1 = 17
+    case local2 = 18
+    case local3 = 19
+    case local4 = 20
+    case local5 = 21
+    case local6 = 22
+    case local7 = 23
+}
+
+public enum SyslogPriorities : UInt8 {
+    case emergency = 0
+    case alert = 1
+    case critical = 2
+    case error = 3
+    case warning = 4
+    case notice = 5
+    case information = 6
+    case debug = 7
+}
+
 extension DateFormatter {
     public class func RFC3339() -> DateFormatter {
         let formatter = DateFormatter()
