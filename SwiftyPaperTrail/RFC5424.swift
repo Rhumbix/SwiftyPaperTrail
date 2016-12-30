@@ -35,7 +35,7 @@ extension Scanner {
 public struct RFC5424Packet {
     public var version : Int = 1
     public var priority : UInt8 {
-        get { return (facility << 3) + severity }
+        get { return (facility << 3) | severity }
         set {
             facility = newValue >> 3
             severity = newValue & 7
@@ -66,7 +66,9 @@ public struct RFC5424Packet {
     public var structured : String?
     public var message : String?
 
-    public init() {}
+    public init() {
+        version = 1
+    }
 
     public static func parse( packet frame : String ) -> RFC5424Packet {
         func defaultPacket() -> RFC5424Packet {
@@ -86,7 +88,8 @@ public struct RFC5424Packet {
         guard let hostName = scanner.nextWord() else { return defaultPacket() }
         guard let app = scanner.nextWord() else { return defaultPacket() }
         guard let pidWord = scanner.nextWord() else { return defaultPacket() }
-        guard let messageWord = scanner.nextWord() else { return defaultPacket() }
+
+        guard let messageIDWord = scanner.nextWord() else { return defaultPacket() }
 
         var structuredData : String?
         if scanner.verifyConstant(character: "[") {
@@ -97,7 +100,6 @@ public struct RFC5424Packet {
             }
         }
 
-
         var packet = RFC5424Packet()
         packet.version = version
         packet.priority = UInt8(priority)
@@ -105,9 +107,38 @@ public struct RFC5424Packet {
         packet.host = hostName == "-" ? nil : hostName
         packet.application = app == "-" ? nil : app
         packet.pid = pidWord == "-" ? nil : pidWord
-        packet.messageID = messageWord == "-" ? nil : messageWord
+        packet.messageID = messageIDWord == "-" ? nil : messageIDWord
         packet.structured = structuredData
         packet.message = scanner.remainder()
         return packet
     }
+
+    private func formatWord( maybeValue : String? ) -> String {
+        if let value = maybeValue {
+            return value
+        } else {
+            return "-"
+        }
+    }
+
+    private func formatDate() -> String {
+        guard let knownWhen = self.timestamp else {
+            return "-"
+        }
+        let formatter = DateFormatter.RFC3339()
+        formatter.timeZone = TimeZone(identifier: "GMT")
+        return formatter.string(from: knownWhen)
+    }
+
+    public var asString : String {  get {
+        let date = formatDate()
+        let host = formatWord(maybeValue: self.host)
+        let application = formatWord(maybeValue: self.application)
+        let pidWord = formatWord(maybeValue: self.pid)
+        let messageIDWord = formatWord(maybeValue: self.messageID)
+        let data = formatWord(maybeValue: self.structured)
+        let msg = formatWord(maybeValue: self.message)
+
+        return "<\(priority)>\(version) \(date) \(host) \(application) \(pidWord) \(messageIDWord) \(data) \(msg)"
+    } }
 }

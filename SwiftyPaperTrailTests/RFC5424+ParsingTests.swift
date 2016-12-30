@@ -10,6 +10,10 @@ import Foundation
 import XCTest
 import SwiftyPaperTrail
 
+// The following were taken from teh RFC located at https://tools.ietf.org/html/rfc5424#page-191
+// We've decided to forgo more complex examples of structured data due to not needing them for our purpose
+// If you would like to contribute a more complicated example please feel free to submit a PR
+
 class RFC5424_Example1 : XCTestCase {
     var packet : RFC5424Packet!
 
