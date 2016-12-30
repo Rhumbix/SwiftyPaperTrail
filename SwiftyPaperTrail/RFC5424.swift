@@ -87,7 +87,16 @@ public struct RFC5424Packet {
         guard let app = scanner.nextWord() else { return defaultPacket() }
         guard let pidWord = scanner.nextWord() else { return defaultPacket() }
         guard let messageWord = scanner.nextWord() else { return defaultPacket() }
-        guard let structWord = scanner.nextWord() else { return defaultPacket() }
+
+        var structuredData : String?
+        if scanner.verifyConstant(character: "[") {
+            structuredData = scanner.scanUp(to: "]")
+        }else {
+            guard scanner.verifyConstant(character: "-") else {
+                return defaultPacket()
+            }
+        }
+
 
         var packet = RFC5424Packet()
         packet.version = version
@@ -97,7 +106,7 @@ public struct RFC5424Packet {
         packet.application = app == "-" ? nil : app
         packet.pid = pidWord == "-" ? nil : pidWord
         packet.messageID = messageWord == "-" ? nil : messageWord
-        packet.structured = structWord == "-" ? nil : structWord
+        packet.structured = structuredData
         packet.message = scanner.remainder()
         return packet
     }
