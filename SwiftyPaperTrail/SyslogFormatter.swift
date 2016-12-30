@@ -25,26 +25,17 @@ import SwiftyLogger
     programName
 */
 
-class SyslogFormatter {
-    static let sharedInstance = SyslogFormatter()
+public class SyslogFormatter {
+    public static let sharedInstance = SyslogFormatter()
     
-    var machineName:String?
-    var programName:String?
-    private var dateFormat:String = "yyyy-MM-dd'T'HH:mm:ss"
-    private var dateFormatter:DateFormatter!
-    
-    init() {
-        dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-    }
-    
-    private func dateString(date:Date) -> String {
-        return dateFormatter!.string(from: date)
-    }
+    public var machineName:String?
+    public var programName:String?
+
+    public init() { }
     
     private func getMachineName() -> String {
-        if machineName != nil {
-            return machineName!
+        if let name = machineName {
+            return name
         }
         
         var machineString = "SwiftyPapertrailDefaultMachine"
@@ -56,7 +47,7 @@ class SyslogFormatter {
         return machineString.trimmingCharacters(in: .whitespaces)
     }
     
-    private func getProgramName() -> String {
+    private func getProgramName() -> String? {
         if programName != nil {
             return programName!
         }
@@ -72,14 +63,17 @@ class SyslogFormatter {
             programArray.append(buildString.trimmingCharacters(in: .whitespaces))
         }
 
-        return programArray.count > 0 ? programArray.joined(separator: "-") : "SwiftyPapertrail"
+        return programArray.count > 0 ? programArray.joined(separator: "-") : nil
 
     }
     
-    func formatLogMessage(message:String, date:Date = Date()) -> String {
-        let timeStamp = dateString(date: date)
-        let machineName = getMachineName()
-        let programName = getProgramName()
-        return "<14>\(timeStamp) \(machineName) \(programName): \(message)"
+    public func formatLogMessage(message:String, date:Date = Date()) -> String {
+        var packet = RFC5424Packet()
+        packet.timestamp = date
+        packet.host = getMachineName()
+        packet.application = getProgramName()
+        packet.message = message
+
+        return packet.asString
     }
 }
