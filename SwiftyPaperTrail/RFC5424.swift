@@ -36,7 +36,7 @@ public enum SyslogFacilities : UInt8 {
     case local7 = 23
 }
 
-public enum SyslogPriorities : UInt8 {
+public enum SyslogSeverity : UInt8 {
     case emergency = 0
     case alert = 1
     case critical = 2
@@ -48,9 +48,19 @@ public enum SyslogPriorities : UInt8 {
 }
 
 extension DateFormatter {
-    public class func RFC3339() -> DateFormatter {
+    public class func RFC3339_input() -> DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        return formatter
+    }
+
+    //If you are reading this, upvote http://stackoverflow.com/questions/28016578/swift-how-to-create-a-date-time-stamp-and-format-as-iso-8601-rfc-3339-utc-tim
+    public class func RFC3339_output() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
         return formatter
     }
 }
@@ -65,7 +75,7 @@ extension Scanner {
     func scanDate_RFC3339() -> Date? {
         guard let word = nextWord() else { return nil }
 
-        let format = DateFormatter.RFC3339()
+        let format = DateFormatter.RFC3339_input()
         let result = format.date(from: word)
         return result
     }
@@ -81,7 +91,7 @@ public struct RFC5424Packet {
         }
     }
 
-    public var facility : UInt8 = 1 {
+    public var facility : UInt8 = SyslogFacilities.user.rawValue {
         didSet {
             if facility > 23 {
                 fatalError("Facility may not be than 23")
@@ -89,7 +99,7 @@ public struct RFC5424Packet {
         }
     }
 
-    public var severity : UInt8 = 5 {
+    public var severity : UInt8 = SyslogSeverity.critical.rawValue {
         didSet {
             if severity > 7 {
                 fatalError("Severity may not exced 7")
@@ -164,14 +174,13 @@ public struct RFC5424Packet {
         guard let knownWhen = self.timestamp else {
             return "-"
         }
-        let formatter = DateFormatter.RFC3339()
-        formatter.timeZone = TimeZone(identifier: "GMT")
+        let formatter = DateFormatter.RFC3339_output()
         return formatter.string(from: knownWhen)
     }
 
     public var asString : String {  get {
         let date = formatDate()
-        let host = formatWord(maybeValue: self.host)
+        let host = formatWord(maybeValue: self.host).lowercased()
         let application = formatWord(maybeValue: self.application)
         let pidWord = formatWord(maybeValue: self.pid)
         let messageIDWord = formatWord(maybeValue: self.messageID)

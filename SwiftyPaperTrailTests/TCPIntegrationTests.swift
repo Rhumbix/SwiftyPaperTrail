@@ -17,7 +17,7 @@ class TCPIntegrationTests : XCTestCase {
         loggerFactory.minimumLogLevel = .debug
         loggerFactory.addTarget(transport)
         let logger = loggerFactory.makeLogger()
-        logger.logCritical("Sing the blues")
-        transport.disconnect()
+        logger.logInfo("Sing the blues")
+//        transport.disconnect()
     }
 }

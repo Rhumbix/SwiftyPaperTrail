@@ -37,7 +37,7 @@ class RFC5424_Example1 : XCTestCase {
         components.timeZone = TimeZone(identifier: "UTC")
 
         let when = components.date
-        assertWithinMillisecond( actual: packet.timestamp, expected: when )
+        assertWithinMillisecond( actual: packet.timestamp!, expected: when! )
     }
 
     func test_host(){ XCTAssertEqual( packet.host, "mymachine.example.com") }

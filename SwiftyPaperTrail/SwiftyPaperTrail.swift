@@ -17,7 +17,7 @@ public class SwiftyPaperTrail : LoggerTarget {
         set { _minimumLogLevel = newValue }
     }
 
-    private var _messageFormatter : SwiftyLogger.LogMessageFormatter?
+    private var _messageFormatter : SwiftyLogger.LogMessageFormatter? = SyslogFormatter()
     public var messageFormatter : SwiftyLogger.LogMessageFormatter? {
         get { return _messageFormatter }
         set { _messageFormatter = newValue }
@@ -75,12 +75,7 @@ public class SwiftyPaperTrail : LoggerTarget {
     }
 
     func logMessage(message: String, date:Date = Date(), callBack:(() -> Void)?=nil) {
-        let syslogMessage = syslogFormatter.formatLogMessage(message: message, date: date)
-        if !validatesSyslogFormat(message: message) {
-            fatalError("Formatting check failed")
-        }
-
-        guard let data = syslogMessage.data(using: String.Encoding.utf8) else {
+        guard let data = message.data(using: String.Encoding.utf8, allowLossyConversion: true) else {
             fatalError("Failed to encode as UTF8")
         }
 

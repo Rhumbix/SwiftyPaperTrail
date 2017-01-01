@@ -37,8 +37,12 @@ class SwiftyLoggerTests : XCTestCase {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
                 return
             }
-            let message = String(data: buffer.writes[0], encoding: .utf8)
-            XCTAssertTrue(message?.hasSuffix(logMessage) ?? false)
+            let message = String(data: buffer.writes[0], encoding: .utf8)!
+            let packet = RFC5424Packet.parse(packet: message)
+            XCTAssertNotNil(packet.application)
+            
+            let packetMessage = packet.message
+            XCTAssertEqual(packetMessage, packet.application! + ": " + logMessage)
         }
     }
 }

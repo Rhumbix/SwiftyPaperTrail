@@ -25,7 +25,7 @@ import SwiftyLogger
     programName
 */
 
-public class SyslogFormatter {
+public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
     public static let sharedInstance = SyslogFormatter()
     
     public var machineName:String?
@@ -38,7 +38,7 @@ public class SyslogFormatter {
             return name
         }
         
-        var machineString = "SwiftyPapertrailDefaultMachine"
+        var machineString = "SwiftyPapertrail" //WARNING: 30 chars are considered invalid by papertrail 
         let identifier = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier")
         if let idString = identifier as? String {
             machineString = idString
@@ -63,10 +63,32 @@ public class SyslogFormatter {
             programArray.append(buildString.trimmingCharacters(in: .whitespaces))
         }
 
-        return programArray.count > 0 ? programArray.joined(separator: "-") : nil
+        return programArray.count > 0 ? programArray.joined(separator: "-") : "iOS"
 
     }
-    
+
+    public func format(message logMessage: LogMessage) -> String {
+        var severity : UInt8 = SyslogSeverity.error.rawValue
+        switch(logMessage.logLevel){
+        case .info:
+            severity = SyslogSeverity.information.rawValue
+        default:
+            fatalError("Unahndled log leve: \(logMessage.logLevel)")
+        }
+
+        var packet = RFC5424Packet()
+        packet.host = getMachineName()
+        packet.application = getProgramName()
+        packet.facility = SyslogFacilities.mail.rawValue
+
+        packet.timestamp = logMessage.timestamp
+        packet.message = packet.application! + ": " + logMessage.message
+        packet.severity = severity
+
+
+        return packet.asString
+    }
+
     public func formatLogMessage(message:String, date:Date = Date()) -> String {
         var packet = RFC5424Packet()
         packet.timestamp = date

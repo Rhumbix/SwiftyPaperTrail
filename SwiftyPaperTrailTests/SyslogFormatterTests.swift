@@ -23,11 +23,11 @@ class SyslogFormatterTests: XCTestCase {
     }
     
     func testDifferentMachineName() {
-        let customMachineName = "My-Custom-Machine-Name"
+        let customMachineName = "my-custom-machine-name"
         SyslogFormatter.sharedInstance.machineName = customMachineName
         let formattedString = SyslogFormatter.sharedInstance.formatLogMessage(message: "Testing Machine Name Change")
         let packet = RFC5424Packet.parse(packet: formattedString)
-        XCTAssertEqual(packet.host, "My-Custom-Machine-Name")
+        XCTAssertEqual(packet.host, "my-custom-machine-name")
     }
     
     func testDifferentProgramName() {

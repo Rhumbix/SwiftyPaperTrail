@@ -40,7 +40,7 @@ class RFC3339Tests : XCTestCase {
         components.timeZone = TimeZone(identifier: "GMT")
         let expected = components.date
 
-        let parser = DateFormatter.RFC3339()
+        let parser = DateFormatter.RFC3339_output()
         let when = parser.date(from: "2003-10-11T22:14:15.003Z")
 
         assertWithinMillisecond( actual: when!, expected: expected! )

@@ -8,6 +8,7 @@
 
 import CocoaAsyncSocket
 
+//Intend to comply with RFC6587
 public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     private var tcpSocket:GCDAsyncSocket?
     private var host : String
@@ -30,11 +31,16 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     var useTLS:Bool = false
 
     public func sendData( data : Data, callback : (() -> Void)? ) {
-        if tcpSocket == nil {
-            connectTCPSocket()
-        }
+        if tcpSocket == nil { connectTCPSocket() }
+
+        //Add frame delimiter
+        var frame = Data()
+        frame.append(data)
+        frame.append(10)
+
+        //Dispatch the frame
         let tag = callbacks.registerCallback(optionalCallback: callback)
-        tcpSocket!.write(data, withTimeout: -1, tag: tag)
+        tcpSocket!.write(frame, withTimeout: -1, tag: tag)
     }
 
     private func connectTCPSocket() {
@@ -48,7 +54,6 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
         if useTLS {
             tcpSocket!.startTLS(nil)
         }
-
     }
 
     public func disconnect() {

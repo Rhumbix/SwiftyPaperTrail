@@ -29,7 +29,7 @@ class SwiftyPaperTrailTests: XCTestCase {
             }
 
             let sent = String(data: buffer.buffers[0].buffer, encoding: .utf8)
-            XCTAssertTrue(sent!.hasSuffix("Testing TCP without TLS"))
+            XCTAssertTrue(sent!.hasSuffix("Testing TCP without TLS\n"))
         }
     }
 }
