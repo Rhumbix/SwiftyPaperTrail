@@ -16,9 +16,11 @@ class SwiftyPaperTrailTests: XCTestCase {
         let buffer = BufferingService()
         let port = buffer.awaitData()
 
+        let exampleToSend = "Testing TCP without TLS"
+
         let pt = SwiftyPaperTrail(wireLayer: TCPTransport(to: "localhost", at: port))
         let sendSync = expectation(description: "Sending data")
-        pt.logMessage(message: "Testing TCP without TLS", callBack: {
+        pt.logMessage(message: exampleToSend, callBack: {
             sendSync.fulfill()
         })
 
@@ -29,7 +31,7 @@ class SwiftyPaperTrailTests: XCTestCase {
             }
 
             let sent = String(data: buffer.buffers[0].buffer, encoding: .utf8)
-            XCTAssertTrue(sent!.hasSuffix("Testing TCP without TLS\n"))
+            XCTAssertTrue(sent!.hasSuffix( exampleToSend + "\n"), "Message \(sent) didn't end with expected string")
         }
     }
 }
