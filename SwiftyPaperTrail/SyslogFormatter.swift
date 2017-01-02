@@ -96,14 +96,4 @@ public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
 
         return packet.asString
     }
-
-    public func formatLogMessage(message:String, date:Date = Date()) -> String {
-        var packet = RFC5424Packet()
-        packet.timestamp = date
-        packet.host = getMachineName()
-        packet.application = getProgramName()
-        packet.message = message
-
-        return packet.asString
-    }
 }
