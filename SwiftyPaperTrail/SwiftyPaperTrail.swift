@@ -53,28 +53,15 @@ public class SwiftyPaperTrail : LoggerTarget {
         self.transport = transport
     }
 
-    private func validatesSyslogFormat(message:String) -> Bool {
-        let pattern = "<14>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2} .+ .+:.*"
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-        let matches = regex.matches(in: message, options: [], range: NSRange(location: 0, length: message.characters.count))
-        
-        if matches.isEmpty {
-            return true
-        } else {
-            NSLog("Format does not comply with Papertrail Syslog Formatting")
-            return false
-        }
-    }
-    
     public func disconnect() {
         transport.disconnect()
     }
 
     public func log(formattedMessage: String) -> Void {
-        logMessage(message: formattedMessage, date: Date(), callBack: nil)
+        logMessage(message: formattedMessage, callBack: nil)
     }
 
-    func logMessage(message: String, date:Date = Date(), callBack:(() -> Void)?=nil) {
+    public func logMessage(message: String, callBack:(() -> Void)?=nil) {
         guard let data = message.data(using: String.Encoding.utf8, allowLossyConversion: true) else {
             fatalError("Failed to encode as UTF8")
         }
