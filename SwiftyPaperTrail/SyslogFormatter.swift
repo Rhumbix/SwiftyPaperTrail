@@ -70,10 +70,18 @@ public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
     public func format(message logMessage: LogMessage) -> String {
         var severity : UInt8 = SyslogSeverity.error.rawValue
         switch(logMessage.logLevel){
+        case .debug:
+            severity = SyslogSeverity.debug.rawValue
+        case .verbose:
+            severity = SyslogSeverity.information.rawValue
         case .info:
             severity = SyslogSeverity.information.rawValue
-        default:
-            fatalError("Unahndled log leve: \(logMessage.logLevel)")
+        case .warning:
+            severity = SyslogSeverity.warning.rawValue
+        case .error:
+            severity = SyslogSeverity.error.rawValue
+        case .critical:
+            severity = SyslogSeverity.critical.rawValue
         }
 
         var packet = RFC5424Packet()
