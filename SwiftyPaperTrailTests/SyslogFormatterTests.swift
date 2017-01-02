@@ -46,5 +46,17 @@ class SyslogFormatterTests: XCTestCase {
         let packet = RFC5424Packet.parse(packet: formattedString)
         XCTAssertEqual(packet.application, customProgramName)
     }
-    
+
+    func test_syslogFacilityOverriden() {
+        var message = LogMessage()
+        message.message = "Testing Program for Syslog facility chnage"
+
+        let formatter = SyslogFormatter()
+        formatter.facility = .kernel
+
+        let formattedString = formatter.format(message: message)
+
+        let packet = RFC5424Packet.parse(packet: formattedString)
+        XCTAssertEqual(packet.facility, SyslogFacilities.kernel.rawValue)
+    }
 }

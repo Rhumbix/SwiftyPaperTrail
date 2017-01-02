@@ -29,6 +29,7 @@ public class SyslogFormatter : LogMessageFormatter {
     //WARNING: 30 chars are considered invalid by papertrail
     public var machineName : String = SyslogFormatter.inferMachineName()
     public var programName : String = SyslogFormatter.inferProgramName()
+    public var facility : SyslogFacilities = SyslogFacilities.mail
 
     public init() { }
 
@@ -78,7 +79,7 @@ public class SyslogFormatter : LogMessageFormatter {
         var packet = RFC5424Packet()
         packet.host = self.machineName
         packet.application = self.programName
-        packet.facility = SyslogFacilities.mail.rawValue
+        packet.facility = facility.rawValue
 
         packet.timestamp = logMessage.timestamp
         packet.message = packet.application! + ": " + logMessage.message
