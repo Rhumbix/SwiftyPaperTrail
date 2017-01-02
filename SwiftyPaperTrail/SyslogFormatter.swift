@@ -26,8 +26,6 @@ import SwiftyLogger
 */
 
 public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
-    public static let sharedInstance = SyslogFormatter()
-    
     public var machineName:String?
     public var programName:String?
 

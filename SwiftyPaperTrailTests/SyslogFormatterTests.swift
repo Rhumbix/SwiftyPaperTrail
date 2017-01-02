@@ -15,7 +15,7 @@ class SyslogFormatterTests: XCTestCase {
         var message = LogMessage()
         message.message = "Testing Message"
 
-        let formattedString = SyslogFormatter.sharedInstance.format(message: message)
+        let formattedString = SyslogFormatter().format(message: message)
         let packet = RFC5424Packet.parse(packet: formattedString)
         XCTAssertEqual(packet.message, "iOS: Testing Message")
     }
@@ -25,9 +25,10 @@ class SyslogFormatterTests: XCTestCase {
         message.message = "Testing Machine Name Change"
 
         let customMachineName = "my-custom-machine-name"
-        SyslogFormatter.sharedInstance.machineName = customMachineName
+        let formatter = SyslogFormatter()
+        formatter.machineName = customMachineName
 
-        let formattedString = SyslogFormatter.sharedInstance.format(message: message)
+        let formattedString = formatter.format(message: message)
         let packet = RFC5424Packet.parse(packet: formattedString)
         XCTAssertEqual(packet.host, "my-custom-machine-name")
     }
@@ -37,8 +38,10 @@ class SyslogFormatterTests: XCTestCase {
         message.message = "Testing Program Name Change"
 
         let customProgramName = "My-Custom-Program-Name"
-        SyslogFormatter.sharedInstance.programName = customProgramName
-        let formattedString = SyslogFormatter.sharedInstance.format(message: message)
+        let formatter = SyslogFormatter()
+        formatter.programName = customProgramName
+
+        let formattedString = formatter.format(message: message)
 
         let packet = RFC5424Packet.parse(packet: formattedString)
         XCTAssertEqual(packet.application, customProgramName)
