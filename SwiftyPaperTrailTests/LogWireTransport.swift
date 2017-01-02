@@ -21,6 +21,7 @@ class SwiftyPaperTrailTests: XCTestCase {
         let pt = SwiftyPaperTrail(wireLayer: TCPTransport(to: "localhost", at: port))
         let sendSync = expectation(description: "Sending data")
         pt.logMessage(message: exampleToSend, callBack: {
+            sleep(1) //Without this the buffer is sometimes empty in the assertion callback :-/
             sendSync.fulfill()
         })
 
