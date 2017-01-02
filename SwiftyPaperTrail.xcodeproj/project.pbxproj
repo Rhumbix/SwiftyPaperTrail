@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00445C11E1AE30000EC5E96 /* DefaultLoggerFactory+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00445C01E1AE30000EC5E96 /* DefaultLoggerFactory+Extensions.swift */; };
 		A00C69161E00C77B0032CF7C /* SwiftyLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00C69151E00C77B0032CF7C /* SwiftyLoggerTests.swift */; };
 		A03B58591E088F3700BB23E9 /* TCPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B58581E088F3700BB23E9 /* TCPTransport.swift */; };
 		A03B585B1E088FAA00BB23E9 /* UDPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */; };
@@ -45,6 +46,7 @@
 		59EDC1C749A533B4DBEAEA54 /* Pods_SwiftyPaperTrailTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyPaperTrailTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65DF21D0EF380B104001AF9C /* Pods-SwiftyPaperTrail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrail.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrail/Pods-SwiftyPaperTrail.debug.xcconfig"; sourceTree = "<group>"; };
 		8D40641CA2CDAB319DD5819A /* Pods-SwiftyPaperTrailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyPaperTrailTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyPaperTrailTests/Pods-SwiftyPaperTrailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A00445C01E1AE30000EC5E96 /* DefaultLoggerFactory+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DefaultLoggerFactory+Extensions.swift"; sourceTree = "<group>"; };
 		A00C69151E00C77B0032CF7C /* SwiftyLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyLoggerTests.swift; sourceTree = "<group>"; };
 		A03B58581E088F3700BB23E9 /* TCPTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPTransport.swift; sourceTree = "<group>"; };
 		A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPTransport.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				A03B585A1E088FAA00BB23E9 /* UDPTransport.swift */,
 				A0B767B01E12DD9C00E37FD7 /* RFC3164.swift */,
 				A0B767AC1E12DC8700E37FD7 /* RFC5424.swift */,
+				A00445C01E1AE30000EC5E96 /* DefaultLoggerFactory+Extensions.swift */,
 			);
 			path = SwiftyPaperTrail;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A00445C11E1AE30000EC5E96 /* DefaultLoggerFactory+Extensions.swift in Sources */,
 				A0BE754E1DFF7C5700570263 /* TaggedCallbacks.swift in Sources */,
 				A0B767B11E12DD9C00E37FD7 /* RFC3164.swift in Sources */,
 				A03B585B1E088FAA00BB23E9 /* UDPTransport.swift in Sources */,
