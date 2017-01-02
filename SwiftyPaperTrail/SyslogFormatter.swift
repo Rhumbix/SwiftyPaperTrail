@@ -25,18 +25,15 @@ import SwiftyLogger
     programName
 */
 
-public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
-    public var machineName:String?
-    public var programName:String?
+public class SyslogFormatter : LogMessageFormatter {
+    //WARNING: 30 chars are considered invalid by papertrail
+    public var machineName : String = SyslogFormatter.inferMachineName()
+    public var programName : String = SyslogFormatter.inferProgramName()
 
     public init() { }
-    
-    private func getMachineName() -> String {
-        if let name = machineName {
-            return name
-        }
-        
-        var machineString = "SwiftyPapertrail" //WARNING: 30 chars are considered invalid by papertrail 
+
+    public class func inferMachineName() -> String {
+        var machineString = "SwiftyPapertrail"
         let identifier = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier")
         if let idString = identifier as? String {
             machineString = idString
@@ -45,10 +42,7 @@ public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
         return machineString.trimmingCharacters(in: .whitespaces)
     }
     
-    private func getProgramName() -> String? {
-        if programName != nil {
-            return programName!
-        }
+    public class func inferProgramName() -> String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")
         
@@ -62,7 +56,6 @@ public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
         }
 
         return programArray.count > 0 ? programArray.joined(separator: "-") : "iOS"
-
     }
 
     public func format(message logMessage: LogMessage) -> String {
@@ -83,8 +76,8 @@ public class SyslogFormatter : SwiftyLogger.LogMessageFormatter {
         }
 
         var packet = RFC5424Packet()
-        packet.host = getMachineName()
-        packet.application = getProgramName()
+        packet.host = self.machineName
+        packet.application = self.programName
         packet.facility = SyslogFacilities.mail.rawValue
 
         packet.timestamp = logMessage.timestamp
