@@ -63,6 +63,7 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 
     //Delegate methods
     @objc public func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+        tcpSocket = nil
         disconnectionListener?(self)
     }
 
