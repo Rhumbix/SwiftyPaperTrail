@@ -76,16 +76,28 @@ public class SyslogFormatter : LogMessageFormatter {
             severity = SyslogSeverity.critical.rawValue
         }
 
+        let shortedMessage = shortened(message: logMessage.message)
+
         var packet = RFC5424Packet()
         packet.host = self.machineName
         packet.application = self.programName
         packet.facility = facility.rawValue
 
         packet.timestamp = logMessage.timestamp
-        packet.message = packet.application! + ": " + logMessage.message
+        packet.message = packet.application! + ": " + shortedMessage
         packet.severity = severity
 
 
         return packet.asString
+    }
+
+    private func shortened( message : String ) -> String {
+        if message.characters.count > 1000 {
+            let index = message.index(message.startIndex, offsetBy: 1000)
+            let result = message.substring(to: index)
+            return result + "...truncated @ 1K..."
+        } else {
+            return message
+        }
     }
 }
