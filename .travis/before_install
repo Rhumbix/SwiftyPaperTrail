@@ -1,0 +1,4 @@
+#!/bin/bash -xe
+
+bundle install
+bundle exec pod repo update
