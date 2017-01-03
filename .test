@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-bundle exec pod update
-bundle exec pod repo update
-bundle exec pod install
-set -o pipefail && xcodebuild test -workspace 'SwiftyPaperTrail.xcworkspace' -scheme 'SwiftyPaperTrail' -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.1' ONLY_ACTIVE_ARCH=NO | xcpretty
-bundle exec pod lib lint
