@@ -3,3 +3,4 @@ xcuserdata
 Build/
 DerivedData/
 .DS_Store
+*.sw[op]
