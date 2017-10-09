@@ -31,6 +31,6 @@ class RFC5424_Generator1 : XCTestCase {
         components.timeZone = TimeZone(identifier: "PDT")
         packet.timestamp = components.date
 
-        XCTAssertEqual(packet.asString, "<6>1 2003-10-12T05:14:15.003Z minecraft.invalid Test 1423 - - Threw my sword again")
+        XCTAssertEqual(packet.asString, "82 <6>1 2003-10-12T05:14:15.003Z minecraft.invalid Test 1423 - - Threw my sword again")
     }
 }

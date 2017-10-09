@@ -69,7 +69,7 @@ extension Scanner {
     func nextWord() -> String? {
         var value : NSString?
         guard self.scanUpTo(" ", into: &value), !self.isAtEnd else { return nil }
-        return value as? String
+        return value as String?
     }
 
     func scanDate_RFC3339() -> Date? {
@@ -125,8 +125,13 @@ public struct RFC5424Packet {
             return packet
         }
 
-        let scanner = Scanner(string: frame)
-
+        var scanner = Scanner(string: frame)
+        if let length = scanner.scanInt() {
+            let end = frame.index( frame.startIndex, offsetBy: length + scanner.scanLocation + 1)
+            let start = frame.index( frame.startIndex, offsetBy: scanner.scanLocation + 1)
+            let actualFrame = frame.substring(with: start..<end)
+            scanner = Scanner(string: actualFrame)
+        }
 
         guard scanner.verifyConstant(character: "<") else { return defaultPacket() }
         guard let priority = scanner.scanInt(), priority < 192 else { return defaultPacket() }
@@ -187,6 +192,8 @@ public struct RFC5424Packet {
         let data = formatWord(maybeValue: self.structured)
         let msg = formatWord(maybeValue: self.message)
 
-        return "<\(priority)>\(version) \(date) \(host) \(application) \(pidWord) \(messageIDWord) \(data) \(msg)"
+        let payload = "<\(priority)>\(version) \(date) \(host) \(application) \(pidWord) \(messageIDWord) \(data) \(msg)"
+        let length = payload.lengthOfBytes(using: String.Encoding.utf8)
+        return "\(length) " + payload
     } }
 }

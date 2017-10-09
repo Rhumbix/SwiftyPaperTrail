@@ -13,14 +13,14 @@ public extension Scanner {
         let set = CharacterSet(charactersIn: what)
         var string : NSString?
         self.scanCharacters(from: set, into: &string)
-        return string != nil && string as! String == what
+        return string != nil && string! as String == what
     }
 
     func scanUp(to what : String ) -> String? {
         var value : NSString?
         guard self.scanUpTo(what, into: &value), !self.isAtEnd else { return nil }
         guard verifyConstant(character: what) else { return nil }
-        return value as? String
+        return value as String?
     }
 
     func scanInt() -> Int? {
@@ -36,7 +36,7 @@ public extension Scanner {
         guard scanUpToCharacters(from: CharacterSet.newlines, into: &value) else { return nil }
         guard isAtEnd else { return nil }
 
-        return value as? String
+        return value as String?
     }
 }
 
