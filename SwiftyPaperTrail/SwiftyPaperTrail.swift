@@ -44,7 +44,7 @@ public class SwiftyPaperTrail : LoggerTarget {
     }
     
     // Can customize the formatter
-    var syslogFormatter = SyslogFormatter()
+    public var syslogFormatter = SyslogFormatter()
 
     // Sockets using CocoaAsyncSocket
     private var transport : LogWireTrasnport
