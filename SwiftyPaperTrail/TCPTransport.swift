@@ -18,7 +18,7 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
 
     public var queue : DispatchQueue { get { return defaultDispatchQueue } }
 
-    init( to aHost : String, at aPort : UInt16 ){
+    public init( to aHost : String, at aPort : UInt16 ){
         host = aHost
         port = aPort
         super.init()

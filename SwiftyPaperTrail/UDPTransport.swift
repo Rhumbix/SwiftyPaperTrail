@@ -16,7 +16,7 @@ public class UDPTransport : NSObject, GCDAsyncUdpSocketDelegate, LogWireTrasnpor
     private var port : UInt16
     private var callbacks = TaggedCallbacks()
 
-    init( to aHost : String, at aPort : UInt16 ){
+    public init( to aHost : String, at aPort : UInt16 ){
         host = aHost
         port = aPort
     }
