@@ -28,7 +28,7 @@ public class TCPTransport : NSObject, GCDAsyncSocketDelegate, LogWireTrasnport {
     }
 
     // Encryption for TCP
-    var useTLS:Bool = false
+    public var useTLS:Bool = false
 
     public func sendData( data : Data, callback : (() -> Void)? ) {
         if tcpSocket == nil { connectTCPSocket() }
