@@ -17,7 +17,7 @@ class SyslogFormatterTests: XCTestCase {
 
         let formattedString = SyslogFormatter().format(message: message)
         let packet = RFC5424Packet.parse(packet: formattedString)
-        XCTAssertEqual(packet.message, "iOS: Testing Message")
+        XCTAssertEqual(packet.message, "Testing Message")
     }
     
     func testDifferentMachineName() {

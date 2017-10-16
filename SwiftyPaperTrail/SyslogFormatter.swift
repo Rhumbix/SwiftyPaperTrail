@@ -84,7 +84,7 @@ public class SyslogFormatter : LogMessageFormatter {
         packet.facility = facility.rawValue
 
         packet.timestamp = logMessage.timestamp
-        packet.message = packet.application! + ": " + shortedMessage
+        packet.message = shortedMessage
         packet.severity = severity
 
 

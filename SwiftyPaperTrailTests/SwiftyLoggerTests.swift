@@ -42,7 +42,7 @@ class SwiftyLoggerTests : XCTestCase {
             XCTAssertNotNil(packet.application)
             
             let packetMessage = packet.message
-            XCTAssertEqual(packetMessage, packet.application! + ": " + logMessage)
+            XCTAssertEqual(packetMessage, logMessage)
         }
     }
 }
